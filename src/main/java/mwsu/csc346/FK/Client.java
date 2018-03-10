@@ -67,7 +67,7 @@ public class Client {
 
         TheDB.runQuery("DROP TABLE IF EXISTS " + tableName);
         TheDB.runQuery(DbConfiguration.iscripts.get(scriptName).toString());
-        TheDB.insertData(txtFileName, tableName, "\t");
+        TheDB.insertData(txtFileName, tableName, "|");
     }
 
 
