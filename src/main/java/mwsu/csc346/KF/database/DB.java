@@ -25,7 +25,8 @@ import java.util.Map;
 /*
  *   A DB object class of db operation methods.
  *   Because it pulls dbfileName and iscripts from DbConfiguration,
- *           it doesn't make sense to make more than one instance of it ever.
+ *           it doesn't make sense to make more than one instance of it
+ *                                           (w/o modification).
  *                                    
  */
 public class DB {
@@ -63,6 +64,7 @@ public class DB {
                     System.out.println("A new database has been created: " + fileName);
                     System.out.println();
                     //call config if there are scripts to run (scripts.keySet())
+                    //and if config() returns successful (true)
                     if(scripts.size() > 0) {
                         if(this.config(fileName, scripts)) {
                             printFileMetadata(fileName);
@@ -88,6 +90,8 @@ public class DB {
     Connection conn = null;
     Statement stmt = null;
 
+    boolean success = false;
+
         //connect to the database or creates new one if no db file
         try {
 
@@ -105,17 +109,19 @@ public class DB {
             stmt.close();
             conn.close();
             }
+        
+        success = true;
 
         } catch (SQLException e) {
             //System.out.println("error");
             System.out.println(e.getMessage());
-            return false;
+            return success;
         }
-    return true;
+    return success;
     }
 
 
-    //uses DbSingleton, just because
+    //uses DbSingleton, just to try it out
     public void runQuery(String sqlString) {
        System.out.println("running:   " + sqlString);
        try {
@@ -150,8 +156,13 @@ public class DB {
         System.out.println();
     }
 
-  
+    
     //departments.txt  and  subjects.txt in root of project
+    //Constructs the query of the form:
+    //  
+    //   INSERT INTO tableName(column1,column2,...) VALUES (PK, column1Val, column2Val,...);
+    //    
+    // from db DatabaseMetadata ( "getMetaData()" called on the Connection)
     public void insertData(String fileName, String tableName, String delimiter) {
         try {   
             Connection conn = DriverManager.getConnection(dbUrl);
@@ -185,7 +196,6 @@ public class DB {
                 nameAndCols.deleteCharAt(nameAndCols.lastIndexOf(","));
                 nameAndCols.append(")");
                 System.out.println(nameAndCols.toString());
-                //break;
               }
             }
             System.out.println("inserting into " + tableName + " table");
@@ -257,16 +267,13 @@ public class DB {
             Connection conn = connection;
             DatabaseMetaData meta = metaData;
 
-            String SCHEMA_NAME="${YOUR_SCHEMA_NAME}";
-     
-            String tableType[] = {"TABLE"};
-    
             StringBuilder builder = new StringBuilder();
     
-            ResultSet result = meta.getTables(null,SCHEMA_NAME,null,tableType);
+            ResultSet result = meta.getTables(null,null,null,null);
             while(result.next())
             {
               String tableName = result.getString(3);
+              //exclude from printed report
               if(!tableName.equals("sqlite_sequence"))
               {
                 builder.append(tableName + "( ");
