@@ -22,6 +22,28 @@ public class Client {
 
     }
 
+    public static void printMenu() {
+        System.out.println("==========================================");
+        System.out.println("                   MENU                   ");
+        System.out.println("==========================================");
+        for(String x: menu.keySet()) {
+            System.out.print(x);
+            System.out.print(" : ");
+            System.out.println(menu.get(x).toString());
+        }
+        System.out.println("==========================================");
+    }
+
+    public static void readAndRun() {
+        String input;
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("RUN:?");
+        input = scan.nextLine().toString().toLowerCase();
+
+        if(menu.keySet().contains(input)) commands.get(input).run();
+    }
+
 
     
     public void init() {
