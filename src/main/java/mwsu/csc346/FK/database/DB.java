@@ -114,6 +114,41 @@ public class DB {
     return true;
     }
 
+
+    //uses DbSingleton, just because
+    public void runQuery(String sqlString) {
+       System.out.println("running:   " + sqlString);
+       try {
+        /* Creation of the statement instance */
+        DbSingleton single = DbSingleton.getInstance();
+        Statement state = DbSingleton.getStatement();
+        //execute sqlString param query
+        ResultSet rs = state.executeQuery(sqlString);
+        //get metadata for resultset
+        ResultSetMetaData rsmd = rs.getMetaData();
+
+        int columnsNumber = rsmd.getColumnCount();
+        
+        //print:  columnName1, columnName2, columnName3...
+        for (int i = 1; i <= columnsNumber; i++) {
+                String columnValue = rs.getString(i);
+                System.out.print(rsmd.getColumnName(i) + ", ");
+        }
+        System.out.println();
+        //print:  
+        while (rs.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                String columnValue = rs.getString(i);
+                System.out.print(columnValue + "   ");
+            }
+            System.out.println();
+        }
+        System.out.println("");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println();
+    }
   
     //departments.txt  and  subjects.txt in root of project
     public void insertData(String fileName, String tableName, String delimiter) {
