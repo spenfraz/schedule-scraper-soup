@@ -149,6 +149,7 @@ public class DB {
         }
         System.out.println();
     }
+
   
     //departments.txt  and  subjects.txt in root of project
     public void insertData(String fileName, String tableName, String delimiter) {
@@ -293,9 +294,4 @@ public class DB {
         }
     }
 
-
-    public static void main(String[] args) {
-        DB theDb = new DB();
-
-    }
 }
