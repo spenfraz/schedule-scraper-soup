@@ -64,11 +64,13 @@ public class DB {
                     if(scripts.size() > 0) {
                         if(this.config(fileName, scripts)) {
                             printFileMetadata(fileName);
+                            printDbMetadata(fileName, conn, meta);
                          }
                     }
                }
                if(exists) { 
-                   printFileMetadata(fileName);              
+                   printFileMetadata(fileName);
+                   printDbMetadata(fileName, conn, meta);              
                }
                conn.close();
             }
@@ -136,7 +138,52 @@ public class DB {
         //System.out.println("isSymbolicLink   = " + attr.isSymbolicLink());
         System.out.println("size             = " + attr.size());
         System.out.println();
-    } 
+    }
+
+    public void printDbMetadata(String fileName, Connection connection, DatabaseMetaData metaData) {
+        System.out.println("==========================================");
+        System.out.println("                  TABLES                  ");
+        System.out.println("------------------------------------------");
+        try {
+            Connection conn = connection;
+            DatabaseMetaData meta = metaData;
+
+            String SCHEMA_NAME="${YOUR_SCHEMA_NAME}";
+     
+            String tableType[] = {"TABLE"};
+    
+            StringBuilder builder = new StringBuilder();
+    
+            ResultSet result = meta.getTables(null,SCHEMA_NAME,null,tableType);
+            while(result.next())
+            {
+              String tableName = result.getString(3);
+              if(!tableName.equals("sqlite_sequence"))
+              {
+                builder.append(tableName + "( ");
+                ResultSet columns = metaData.getColumns(null,null,tableName,null);
+     
+                while(columns.next())
+                {
+                    String columnName = columns.getString(4);
+                    builder.append(columnName);
+                    builder.append(",");
+                }
+                builder.deleteCharAt(builder.lastIndexOf(","));
+                builder.append(" )");
+                builder.append("\n");
+                builder.append("---------------------------------------");
+                builder.append("\n");
+              }
+            }
+    
+            System.out.println(builder.toString());
+            System.out.println("=======================================");
+   
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public static void main(String[] args) {
