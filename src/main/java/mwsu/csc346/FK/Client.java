@@ -27,11 +27,11 @@ public class Client {
     public void init() {
 
         // Populate menu descriptions
-      /*menu.put("a", "Erase and Build Subjects Table");
+        menu.put("a", "Erase and Build Subjects Table");
         menu.put("b", "Erase and Build Departments Table");
         menu.put("c", "Print Subjects Table");
         menu.put("d", "Print Departments Table");
-        menu.put("e", "Print disciplinesByDepartment Report");
+      /*menu.put("e", "Print disciplinesByDepartment Report");
         menu.put("g", "Erase and Build Sections Table (promptDepartments)");
         menu.put("h", "Print sectionsByDeptOrDiscipline Report");
         menu.put("i", "Print facultyAndScheduleByDepartment Report");
@@ -41,11 +41,11 @@ public class Client {
        */
 
         // Populate (commands menu) options and functions
-      /*commands.put("a", () -> eraseAndBuildTable("Subjects", ""));
+        commands.put("a", () -> eraseAndBuildTable("Subjects", ""));
         commands.put("b", () -> eraseAndBuildTable("Departments",""));
         commands.put("c", () -> printTable("Subjects"));
         commands.put("d", () -> printTable("Departments"));
-        commands.put("e", () -> printReport("disciplinesByDepartment"));
+      /*commands.put("e", () -> printReport("disciplinesByDepartment"));
         commands.put("g", () -> eraseAndBuildTable("Sections","promptDepartment"));
         commands.put("h", () -> printReport("sectionsByDeptOrDiscipline"));
         commands.put("i", () -> printReport("facultyAndScheduleByDepartment"));
@@ -53,6 +53,21 @@ public class Client {
         commands.put("k", () -> printReport("theControlBreakReport"));
         commands.put("q", () -> System.exit(0));
        */
+    }
+
+
+    public static void printTable(String tableName) {
+        TheDB.runQuery("SELECT * FROM " + tableName);
+    }
+
+
+    public static void eraseAndBuildTable(String tableName, String option) {
+        String scriptName = "create" + tableName + "Table";
+        String txtFileName = tableName.toLowerCase() + ".txt";
+
+        TheDB.runQuery("DROP TABLE IF EXISTS " + tableName);
+        TheDB.runQuery(DbConfiguration.iscripts.get(scriptName).toString());
+        TheDB.insertData(txtFileName, tableName, "\t");
     }
 
 
