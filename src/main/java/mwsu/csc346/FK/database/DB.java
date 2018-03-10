@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.io.IOException;
 
 import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -111,6 +113,77 @@ public class DB {
         }
     return true;
     }
+
+  
+    //departments.txt  and  subjects.txt in root of project
+    public void insertData(String fileName, String tableName, String delimiter) {
+        try {   
+            Connection conn = DriverManager.getConnection(dbUrl);
+            Statement stmt = conn.createStatement();
+
+            //so that committing is done at the end of inserting values, not each insert
+            conn.setAutoCommit(false);
+
+            DatabaseMetaData meta = conn.getMetaData();
+            
+            //final expected form:  tableName(column1.name, column2.name,...)
+            StringBuilder nameAndCols = new StringBuilder();
+    
+            //get table metadata
+            ResultSet result = meta.getTables(null,null,"%",null);
+            while(result.next())
+            { 
+              //when current metadata is for tableName
+              //create the String of form:   tableName(column1.name, column2.name,...)
+              if(tableName.equals(result.getString(3)))
+              {
+                nameAndCols.append(tableName + "( ");
+                ResultSet columns = meta.getColumns(null,null,tableName,null);
+     
+                while(columns.next())
+                {
+                    String columnName = columns.getString(4);
+                    nameAndCols.append(columnName);
+                    nameAndCols.append(", ");
+                }
+                nameAndCols.deleteCharAt(nameAndCols.lastIndexOf(","));
+                nameAndCols.append(")");
+                System.out.println(nameAndCols.toString());
+                //break;
+              }
+            }
+            System.out.println("inserting into " + tableName + " table");
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            String line;
+            int pk = 1;
+            while ( (line=br.readLine()) != null)
+            {
+                StringBuilder valueListStr = new StringBuilder("");
+                String[] values = line.split(delimiter);    //your seperator
+                for(String str: values) {
+                     valueListStr.append(str + ",");
+                }
+                valueListStr.deleteCharAt(valueListStr.lastIndexOf(","));
+                //System.out.println(valueListStr.toString());
+                String sql = "INSERT INTO " + nameAndCols.toString() +
+                             "VALUES ("+ pk +"," + valueListStr.toString() + ");";
+                pk += 1;
+                stmt.executeUpdate(sql);  
+            }
+            br.close();
+            stmt.close();
+            conn.commit();
+            conn.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("failed insert");
+        }     
+        System.out.println("insert success");
+        System.out.println();
+        System.out.println(); 
+    }
+
 
 
     private void printFileMetadata(String fileName) {
