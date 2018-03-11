@@ -222,6 +222,7 @@ public class DB {
             conn.close();
 
         } catch (Exception e) {
+            System.out.println("error,error");
             System.out.println(e.getMessage());
             System.out.println("failed insert");
         }     

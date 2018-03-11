@@ -69,8 +69,8 @@ public class Client {
         menu.put("i", "Print facultyAndScheduleByDepartment Report");
         menu.put("j", "Print ctrlBreakSectionsForDept Report");
         menu.put("k", "Print theControlBreakReport");
-        menu.put("q", "Quit");
-       */
+      */menu.put("q", "Quit");
+       
 
         // Populate (commands menu) options and functions
         commands.put("a", () -> eraseAndBuildTable("Subjects", ""));
@@ -83,8 +83,8 @@ public class Client {
         commands.put("i", () -> printReport("facultyAndScheduleByDepartment"));
         commands.put("j", () -> printReport("ctrlBreakSectionsForDept"));
         commands.put("k", () -> printReport("theControlBreakReport"));
-        commands.put("q", () -> System.exit(0));
-       */
+      */commands.put("q", () -> System.exit(0));
+       
     }
 
 
@@ -99,7 +99,7 @@ public class Client {
 
         TheDB.runQuery("DROP TABLE IF EXISTS " + tableName);
         TheDB.runQuery(DbConfiguration.iscripts.get(scriptName).toString());
-        TheDB.insertData(txtFileName, tableName, "|");
+        TheDB.insertData(txtFileName, tableName, "~");
     }
 
 
