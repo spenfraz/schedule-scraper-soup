@@ -22,7 +22,14 @@ public class Client {
         commands = new HashMap<>();
 
         this.init();
-
+        this.run();
+    }
+    
+    public void run() {
+        while(true) {
+            printMenu();
+            readAndRun();
+        }
     }
 
     public static void printMenu() {
