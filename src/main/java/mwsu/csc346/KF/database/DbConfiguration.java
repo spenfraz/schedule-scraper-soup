@@ -28,9 +28,10 @@ public class DbConfiguration {
                                 " CourseID TEXT NOT NULL, " +
                                 " Department TEXT NOT NULL, " +
                                 " crn TEXT NOT NULL, " +
-                                " Semester TEXT NOT NULL"
+                                " Semester TEXT NOT NULL, "+
                                 " Discipline TEXT NOT NULL, " +
                                 " CourseNumber TEXT NOT NULL, " +
+                                " Section TEXT, " +
                                 " Section TEXT, " +
                                 " Type TEXT, " +
                                 " Title TEXT, " +
@@ -42,7 +43,7 @@ public class DbConfiguration {
                                 " AvailSeats TEXT, " +
                                 " Messages TEXT, " +
                                 " Term TEXT,"+
-                                " FeeTitle TEXT,"
+                                " FeeTitle TEXT," +
                                 " TotalFees REAL, " +
                                 " PerCourseOrPerCredit TEXT, " +
                                 " StartDate TEXT, " +
