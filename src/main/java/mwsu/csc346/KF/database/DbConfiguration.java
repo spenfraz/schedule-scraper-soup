@@ -1,4 +1,4 @@
-package mwsu.csc346.FK;
+package mwsu.csc346.KF.database;
 
 import java.util.HashMap;
 import java.util.Map;
