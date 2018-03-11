@@ -36,30 +36,30 @@ public class Section {
 
     @Override
     public String toString() {
-        return  courseID + "|" +
-                department + "|" +
-                semester + "|" +
-                crn + "|" +
-                discipline + "|" +
-                courseNumber + "|" +
-                section + "|" +
-                type + "|" +
-                title + "|" +
-                hours + "|" +
-                days + "|" +
-                time + "|" +
-                room + "|" +
-                instructor + "|" +
-                maximumEnrollment + "|" +
-                seatsAvailable + "|" +
-                messages + "|" +
-                term + "|" +
-                courseFeesTitle + "|" +
-                courseFeesAmount + "|" +
-                courseFeesType + "|" +
-                beginDate + "|" +
-                endDate + "|" +
-                url + "|";
+        return  courseID + "~" +
+                department + "~" +
+                crn + "~" +
+                semester + "~" +
+                discipline + "~" +
+                courseNumber + "~" +
+                section + "~" +
+                type + "~" +
+                title + "~" +
+                hours + "~" +
+                days + "~" +
+                time + "~" +
+                room + "~" +
+                instructor + "~" +
+                maximumEnrollment + "~" +
+                seatsAvailable + "~" +
+                messages + "~" +
+                term + "~" +
+                courseFeesTitle + "~" +
+                courseFeesAmount + "~" +
+                courseFeesType + "~" +
+                beginDate + "~" +
+                endDate + "~" +
+                url + "~";
     }
 }
 

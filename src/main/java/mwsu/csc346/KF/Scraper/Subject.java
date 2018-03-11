@@ -7,7 +7,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return subjectID + "|" +
-                subjectName + "|";
+        return subjectID + "~" +
+                subjectName;
     }
 }
