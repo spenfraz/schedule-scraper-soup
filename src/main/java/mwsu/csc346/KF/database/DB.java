@@ -1,4 +1,4 @@
-package mwsu.csc346.KF;
+package mwsu.csc346.KF.database;
 
 import java.sql.Connection;
 import java.sql.Statement;

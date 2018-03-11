@@ -1,5 +1,8 @@
 package mwsu.csc346.KF;
 
+import mwsu.csc346.KF.database.DB;
+import mwsu.csc346.KF.database.DbConfiguration;
+
 import java.util.Scanner;
 
 import java.util.List;
