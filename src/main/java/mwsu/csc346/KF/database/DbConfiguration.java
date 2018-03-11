@@ -25,27 +25,28 @@ public class DbConfiguration {
 
     public static final String createSectionsTable = "CREATE TABLE Sections " +
                                 "(SectionID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                " CourseID TEXT NOT NULL, " +
                                 " Department TEXT NOT NULL, " +
-                                " CRN INTEGER NOT NULL, " +
-                                " CourseCode TEXT NOT NULL, " +
-                                " CourseUrl TEXT, " +
-                                " SectionNum INTEGER NOT NULL, " +
-                                " ClassType TEXT NOT NULL, " +
-                                " CreditHours INTEGER NOT NULL, " +
-                                " WeekDays TEXT NOT NULL, " +
-                                " Times TEXT NOT NULL, " +
-                                " Location TEXT NOT NULL, " +
-                                " Instructor TEXT NOT NULL, " +
-                                " MaxEnrollments INTEGER NOT NULL, " +
-                                " AvailSeats INTEGER NOT NULL, " +
-                                " Details TEXT, " +
+                                " crn TEXT NOT NULL, " +
+                                " Semester TEXT NOT NULL"
+                                " Discipline TEXT NOT NULL, " +
+                                " CourseNumber TEXT NOT NULL, " +
+                                " Section TEXT, " +
+                                " Type TEXT, " +
+                                " Title TEXT, " +
+                                " Hours TEXT, " +
+                                " Days TEXT, " +
+                                " Location TEXT, " +
+                                " Instructor TEXT, "+
+                                " MaxEnrollments TEXT, " +
+                                " AvailSeats TEXT, " +
                                 " Messages TEXT, " +
-                                " TotalFees REAL NOT NULL, " +
-                                " FeeTitles TEXT NOT NULL, " +
-                                " PerCourseOrPerCredit TEXT NOT NULL, " +
-                                " CourseTerm TEXT NOT NULL, " +
-                                " StartDate DATE NOT NULL, " +
-                                " EndDate DATE NOT NULL) ";   
+                                " Term TEXT,"+
+                                " FeeTitle TEXT,"
+                                " TotalFees REAL, " +
+                                " PerCourseOrPerCredit TEXT, " +
+                                " StartDate TEXT, " +
+                                " EndDate TEXT) ";
 
        public static final Map iscripts = createInitMap();
        private static Map<String, String> createInitMap()
