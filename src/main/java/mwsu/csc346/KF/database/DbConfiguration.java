@@ -25,18 +25,18 @@ public class DbConfiguration {
 
     public static final String createSectionsTable = "CREATE TABLE Sections " +
                                 "(SectionID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                " CourseID TEXT NOT NULL, " +
-                                " Department TEXT NOT NULL, " +
-                                " crn TEXT NOT NULL, " +
-                                " Semester TEXT NOT NULL, "+
-                                " Discipline TEXT NOT NULL, " +
-                                " CourseNumber TEXT NOT NULL, " +
-                                " Section TEXT, " +
+                                " CourseID TEXT, " +
+                                " Department TEXT, " +
+                                " crn TEXT, " +
+                                " Semester TEXT, "+
+                                " Discipline TEXT, " +
+                                " CourseNumber TEXT, " +
                                 " Section TEXT, " +
                                 " Type TEXT, " +
                                 " Title TEXT, " +
                                 " Hours TEXT, " +
                                 " Days TEXT, " +
+                                " Time TEXT, " +
                                 " Location TEXT, " +
                                 " Instructor TEXT, "+
                                 " MaxEnrollments TEXT, " +
@@ -47,7 +47,8 @@ public class DbConfiguration {
                                 " TotalFees REAL, " +
                                 " PerCourseOrPerCredit TEXT, " +
                                 " StartDate TEXT, " +
-                                " EndDate TEXT) ";
+                                " EndDate TEXT, " +
+                                " url TEXT)";
 
        public static final Map iscripts = createInitMap();
        private static Map<String, String> createInitMap()
