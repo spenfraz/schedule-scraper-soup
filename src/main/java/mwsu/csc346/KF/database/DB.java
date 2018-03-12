@@ -207,7 +207,7 @@ public class DB {
                 StringBuilder valueListStr = new StringBuilder("");
                 String[] values = line.split(delimiter);    //your seperator
                 for(String str: values) {
-                     valueListStr.append(str + ",");
+                     valueListStr.append("\"" + str + "\"" + ",");
                 }
                 valueListStr.deleteCharAt(valueListStr.lastIndexOf(","));
                 //System.out.println(valueListStr.toString());
