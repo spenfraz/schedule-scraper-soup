@@ -35,7 +35,7 @@ class Scraper {
                     .execute();
             doc = response.parse()
 
-            System.out.println(doc)
+          //  System.out.println(doc)
 
             Elements rows = doc.select("tr")
             println("There are ${rows.size()} rows")
@@ -47,7 +47,7 @@ class Scraper {
                     Elements cells = row.select("td")
                     if (className == "list_row") {
                         if (sec != null) {
-                            println "Section: $sec"   //Add to database here!
+                         //   println "Section: $sec"   //Add to database here!
                             writer.println(sec)
                             writer.flush()
                         }
@@ -63,34 +63,34 @@ class Scraper {
                                 sec.courseID = cells[1].text().trim()  //only works in groovy
 
                                 def s = cells.get(1).text().trim()
-                                println "Course is  $s "
+                                //println "Course is  $s "
 
                                 sec.discipline = s.take(3)
                                 sec.courseNumber = s.drop(3)
-                                println("Dicsipline is  ${sec.discipline} ${sec.courseNumber} ")
+                              //  println("Dicsipline is  ${sec.discipline} ${sec.courseNumber} ")
 
                                 sec.instructor = cells[9].text().trim();
-                                println("Instructor  ${sec.instructor} ")
+                                //println("Instructor  ${sec.instructor} ")
 
                                 sec.room = cells[8].text().trim()
 
                                 sec.section = cells[2].text().trim()
-                                println "Section: ${sec.section}"
+                                //println "Section: ${sec.section}"
 
                                 sec.type = cells[3].text().trim()
-                                println "Type: ${sec.type}"
+                                //println "Type: ${sec.type}"
 
                                 sec.title = cells[4].text().trim()
-                                println "Title: ${sec.title}"
+                                //println "Title: ${sec.title}"
 
                                 sec.hours = cells[5].text().trim()
-                                println "Hours: ${sec.hours}"
+                                //println "Hours: ${sec.hours}"
 
                                 sec.days = cells[6].text().trim()
-                                println "Days: ${sec.days}"
+                                //println "Days: ${sec.days}"
 
                                 sec.time = cells[7].text().trim()
-                                println "Time: ${sec.time}"
+                                //println "Time: ${sec.time}"
 
                                 sec.semester = semester
 
@@ -125,13 +125,13 @@ class Scraper {
                                     def s = tag.text()
                                     sec.endDate = s.drop("Course Ends: ".length())
                                     sec.endDate = sec.endDate.trim()
-                                    println "End Date: ${sec.endDate}"
+                                  //  println "End Date: ${sec.endDate}"
                                     break;
                                 case "course_begins":
                                     def s = tag.text()
                                     sec.beginDate = s.drop("Course Begins: ".length())
                                     sec.beginDate = sec.beginDate.trim()
-                                    println "Begin Date: ${sec.beginDate}"
+                                    //println "Begin Date: ${sec.beginDate}"
                                     break;
                                 case "course_seats":
                                     def contents = tag.text()
@@ -142,37 +142,37 @@ class Scraper {
                                         def available = parts[6];
                                         sec.maximumEnrollment = Integer.parseInt(max)
                                         sec.seatsAvailable = Integer.parseInt(available);
-                                        println "Seats ${sec.maximumEnrollment} and ${sec.seatsAvailable}"
+                                      //  println "Seats ${sec.maximumEnrollment} and ${sec.seatsAvailable}"
                                     }
                                     break;
                                 case "course_term":
                                     sec.term = tag.text().trim()
-                                    println "Term: ${sec.term}"
+                                  //  println "Term: ${sec.term}"
                                     break;
                                 case "course_fees"://****************************** NEEDS WORK **********************//
 
                                     def contents = tag.text()
                                     contents.replace("&nbsp;", " ")
-                                    println "Contents: $contents"
+                                    //println "Contents: $contents"
                                     String[] parts = contents.split(/\s\d/,)
 
                                     def part1 = parts[0]
                                     def part2 = parts[1];
 
-                                    println "Part 1: $part1 and Part 2: $part2"
+                                  //  println "Part 1: $part1 and Part 2: $part2"
 
                                     String[] moreParts = part2.split(/\s/)
 
                                     def part4 = moreParts[0]
                                     def part5 = moreParts[1]
 
-                                    println "Part 3 NOW: $part4 and Last Part $part5"
+                                    //println "Part 3 NOW: $part4 and Last Part $part5"
                                     def fees = 0
                                     def type = ""
                                     if (part5.contains("CRED")) {
                                         def amount = part4.toDouble()
                                         def hours = (sec.hours).toDouble()
-                                        println hours
+                                       // println hours
                                         def total = amount * hours
                                         fees += total
                                         type = "PER CREDIT "
@@ -196,7 +196,7 @@ class Scraper {
                     //println "***********Printing"
                     println sec
                     if (sec != null) {
-                        println sec
+                    //    println sec
                         //   sections.add(sec)//adding section record to arraylist
                         //  writer.println(sec)
                     }
@@ -224,7 +224,7 @@ class Scraper {
                 .execute();
         doc = response.parse()
 
-        System.out.println(doc)
+  //      System.out.println(doc)
 
         Elements rows = doc.select("select")
 
@@ -233,7 +233,7 @@ class Scraper {
 
         rows.each { row ->
             Elements tags = row.select("option")
-            println("There are ${tags.size()} options")
+       //     println("There are ${tags.size()} options")
 
             // Elements tags = row.select("option")
             if ( (tags.size()) > 10 && (tags.size()) <= 50) {
@@ -245,7 +245,7 @@ class Scraper {
                         depart.departmentName = tag.text().trim()
                         depart.departmentID = tag.attr("value")
 
-                        println("DepartmentName = ${depart.departmentName} and department ID: ${depart.departmentID}")
+                      //  println("DepartmentName = ${depart.departmentName} and department ID: ${depart.departmentID}")
                         writer.println(depart)
 
                     }
@@ -273,16 +273,16 @@ class Scraper {
                 .execute();
         doc = response.parse()
 
-        System.out.println(doc)
+    //    System.out.println(doc)
 
         Elements rows = doc.select("select")
 
-        println("There are ${rows.size()} rows")
+   //     println("There are ${rows.size()} rows")
         def idName = rows.attr("id");
 
         rows.each { row ->
             Elements tags = row.select("option")
-            println("There are ${tags.size()} options")
+     //       println("There are ${tags.size()} options")
 
             // Elements tags = row.select("option")
             if ( (tags.size()) > 50) {
@@ -294,7 +294,7 @@ class Scraper {
                         sub.subjectName = tag.text().trim()
                         sub.subjectID = tag.attr("value")
 
-                        println("SubjectName = ${sub.subjectName} and department ID: ${sub.subjectID}")
+       //                 println("SubjectName = ${sub.subjectName} and department ID: ${sub.subjectID}")
                         writer.println(sub);
 
 
@@ -306,9 +306,5 @@ class Scraper {
         writer.close()
 
     }//end of getSubjects
-
-
-
-
 
 }
