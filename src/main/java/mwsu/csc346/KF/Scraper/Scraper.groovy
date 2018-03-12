@@ -13,7 +13,7 @@ class Scraper {
 
         Section sec = null;
 
-        ArrayList<String> departmentsList = new ArrayList<String>(Arrays.asList("AF","ART"));//"BIO","BUS","CHE","CST","CSMP","CJLS","EPSS","EDU","ET","EFLJ","GS","HPER","HPG","HON","MIL","MUS","NUR","PSY","FINE","CON"));
+        ArrayList<String> departmentsList = new ArrayList<String>(Arrays.asList("AF","ART", "BIO","BUS","CHE","CST","CSMP","CJLS","EPSS","EDU","ET","EFLJ","GS","HPER","HPG","HON","MIL","MUS","NUR","PSY","FINE","CON"));
         String department;
 
         for(String element : departmentsList) {
