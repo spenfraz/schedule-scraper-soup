@@ -29,6 +29,11 @@ public class Client {
         this.run();
     }
 
+    public static void main(String[] args)
+    {
+        Client client = new Client();
+    }
+
     public void run() {
         while(true) {
             printMenu();
@@ -146,10 +151,5 @@ public class Client {
         TheDB.runQuery("DROP TABLE IF EXISTS " + tableName);
         TheDB.runQuery(DbConfiguration.iscripts.get(scriptName).toString());
         TheDB.insertData(txtFileName, tableName, "~");
-    }
-
-    public static void main(String[] args)
-    {
-        Client client = new Client();
     }
 }
