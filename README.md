@@ -9,4 +9,4 @@ Java-based web scraper (MWSU class schedule data) using Jsoup, Maven and Groovy.
 ##### 3. Navigate
     $ cd ./schedule-scraper-soup/
 ##### 4. Run
-    $ mvn clean install spring-boot:run
+    $ mvn clean compile assembly:single
