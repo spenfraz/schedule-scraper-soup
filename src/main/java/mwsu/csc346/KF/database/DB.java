@@ -22,9 +22,19 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- *   A DB object class of db operation methods.
- *   Because it pulls dbfileName and iscripts from DbConfiguration,
+/*   
+ *   Creates a new sqlite <dbfileName>.db file if one doesn't exist already.
+ *   (Creation process involves running scripts in DbConfiguration on the created database.)
+ *   Prints file metadata and db metadata.
+ *
+ *   The 2 primary functions used in Client.java:
+ *
+ *                 runQuery(String sqlString)
+ *
+ *                 insert(String fileName, String tableName, String delimiter)      
+ *
+ *
+ *   Because it reads dbfileName and iscripts from DbConfiguration,
  *           it doesn't make sense to make more than one instance of it
  *                                           (w/o modification).
  *                                    
@@ -141,7 +151,7 @@ public class DB {
                 System.out.print(rsmd.getColumnName(i) + ", ");
         }
         System.out.println();
-        //print:  
+        //print:  columnVal1, columnVal2, columnVal3...
         while (rs.next()) {
             for (int i = 1; i <= columnsNumber; i++) {
                 String columnValue = rs.getString(i);
@@ -211,6 +221,7 @@ public class DB {
                 }
                 valueListStr.deleteCharAt(valueListStr.lastIndexOf(","));
                 //System.out.println(valueListStr.toString());
+                // ACTUAL INSERT INTO STATEMENT
                 String sql = "INSERT INTO " + nameAndCols.toString() +
                              "VALUES ("+ pk +"," + valueListStr.toString() + ");";
                 pk += 1;
