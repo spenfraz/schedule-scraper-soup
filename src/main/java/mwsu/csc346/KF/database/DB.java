@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*   
- *   Creates a new sqlite <dbfileName>.db file if one doesn't exist already.
+ *   Creates a new sqlite <dbfileName> file if one doesn't exist already.
  *   (Creation process involves running scripts in DbConfiguration on the created database.)
  *   Prints file metadata and db metadata.
  *
