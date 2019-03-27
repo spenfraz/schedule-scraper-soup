@@ -1,4 +1,6 @@
 # schedule-scraper-soup
+dev. environment ==> https://github.com/spenfraz/vagrant-dev-envs/tree/ansible_local
+---
 Java-based web scraper (MWSU class schedule data) using Jsoup, Maven and Groovy.
 
 ----
